@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+
+<odoo>
+    <record id="id_status_synchronization_wizard_form" model="ir.ui.view">
+        <field name="name">Status Synchronization Wizard</field>
+        <field name="model">status.synchronization.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Status Sync">
+                <group col='4' colspan="2">
+                    <field name="instance_id" widget="selection" required="1"/>
+                    <field name="operation" widget="selection" required="1"/>
+                </group>
+                <footer>
+                    <button name="start_status_synchronization"
+                            string="Synchronize Now"
+                            type="object"
+                            class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class='oe_link' special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+
+<odoo>
+    <record id="action_sync_order_status_bulk" model="ir.actions.server">
+        <field name="name">Sync Order Status To Ecommerce</field>
+        <field name="model_id" ref="bridge_skeleton.model_connector_order_mapping"/>
+        <field name="state">code</field>
+        <field name="code">action = env["status.synchronization.wizard"].start_bulk_status_synchronization()</field>
+        <field name="binding_model_id" ref="bridge_skeleton.model_connector_order_mapping"/>
+    </record>
+</odoo>

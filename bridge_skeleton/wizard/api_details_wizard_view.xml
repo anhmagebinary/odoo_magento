@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+<odoo>
+    <record id="id_api_details_wizard_form" model="ir.ui.view">
+        <field name="name">api.details.wizard</field>
+        <field name="model">api.details.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="API Credentials">
+                <sheet>
+                    <div class="oe_horizontal_separator oe_clear ">
+                        <separator string="Ecomm API Settings"/>
+                    </div>
+                    <group>
+                        <label for="name"/>
+                        <b class="o_form_required"><field name="name" colspan="4" placeholder="Example: http://myecomm.com"/></b>
+                    </group>
+                    <h2 style="margin-top: 10px !important;background-color: #e9ecef;padding-left: 8px;">
+                        API Credentials
+                    </h2>
+                    <div id="api_reference">
+                    </div>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label string="API User Name" for="user"/>
+                                <div>
+                                    <field name="user" placeholder="Example: apiuser"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <b><field name="update_pwd"/></b>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Update API Password" for="update_pwd"/>
+                                <div class="text-muted">
+                                    enable for update API password of connected channel.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box" attrs="{'invisible': [('update_pwd','!=', True)], 'required': [('update_pwd','=', True)]}">
+                            <div class="o_setting_right_pane">
+                                <label string=" API Password" for="pwd"/>
+                                <div>
+                                    <field name="pwd" placeholder="Example: apipassword" password="True"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+                <footer>
+                    <button name="button_set_api_details" string="Set API Credentials" 
+                        type="object" class="oe_highlight"/>
+                    <button special="cancel" class="oe_highlight" icon="fa-archive" string="Close" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

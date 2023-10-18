@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+
+<odoo>
+    <!--~~=========== Magento Product Attribute Value Mapping ======================~~~-->
+    <record id="connector_option_form" model="ir.ui.view">
+        <field name="name">connector.option.mapping.form</field>
+        <field name="model">connector.option.mapping</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Attribute Value" create="false" edit="false">
+                <group>
+                    <field name="name" readonly="1"/>
+                    <newline/>
+                    <field name="ecomm_id" readonly="1"/>
+                    <field name="odoo_id" readonly="1"/>
+                    <field name="odoo_attribute_id"/>
+                    <field name="ecomm_attribute_id"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="connector_option_tree" model="ir.ui.view">
+        <field name="name">connector.option.mapping.tree</field>
+        <field name="model">connector.option.mapping</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree create="false" string="Attribute Value">
+                <field name="id" optional="hide"/>
+                <field name="name"/>
+                <field name="odoo_id"/>
+                <field name="odoo_attribute_id"/>
+                <field name="ecomm_attribute_id"/>
+                <field name="ecomm_id"/>
+                <field name="instance_id" optional="show"/>
+                <field name="ecommerce_channel" readonly="1" optional="hide"/>
+                <field name="created_by" readonly="1" optional="show"/>
+                <field name="create_date" readonly="1" optional="show"/>
+                <field name="write_date" readonly="1" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_connector_option_calendar" model="ir.ui.view">
+        <field name="name">connector.option.mapping.calendar</field>
+        <field name="model">connector.option.mapping</field>
+        <field name="arch" type="xml">
+            <calendar string="Product Attribute Option Mapping" date_start="create_date" color="ecommerce_channel" hide_time="true" event_limit="5">
+                <field name="create_uid" avatar_field="avatar_128"/>
+                <field name="name"/>
+                <field name="odoo_id"/>
+                <field name="ecomm_id"/>
+                <field name="created_by"/>
+                <field name="ecommerce_channel" filters="1" invisible="1"/>
+                <field name="instance_id" filters="1" invisible="1"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_connector_option_graph">
+        <field name="name">connector.option.mapping.graph</field>
+        <field name="model">connector.option.mapping</field>
+        <field name="arch" type="xml">
+            <graph string="Product Attribute Option Mapping" sample="1">
+                <field name="create_date" interval="month" type="row"/>
+                <field name="instance_id" type="row"/>
+                <field name="ecommerce_channel" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Search View for Magento Product Attribute Value  -->
+    <record id="connector_option_search" model="ir.ui.view">
+        <field name="name">connector.option.mapping.search</field>
+        <field name="model">connector.option.mapping</field>
+        <field name="arch" type="xml">
+            <search string="Option">
+                <field name="name" filter_domain="[('name','ilike',self)]"/>
+                <field name="odoo_id"/>
+                <field name="ecomm_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Channel" name="group_by_ecomm" context="{'group_by':'ecommerce_channel'}"/>
+                    <filter string="Instance" name="group_by_instance" context="{'group_by':'instance_id'}"/>
+                    <filter string="Created By" name="createby" domain="[]" context="{'group_by':'created_by'}" />
+                    <filter string="Sync Date" name="group_by_create_date" domain="[]" context="{'group_by': 'create_date'}"/>
+                </group>
+                <searchpanel>
+                    <field name="instance_id" string="Instances" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="connector_option_action" model="ir.actions.act_window">
+        <field name="name">Ecomm Attribute Value</field>
+        <field name="res_model">connector.option.mapping</field>
+        <field name="view_mode">tree,form,calendar,graph</field>
+        <field name="view_id" ref="connector_option_tree"/>
+        <field name="search_view_id" ref = "connector_option_search"/>
+    </record>
+</odoo>
